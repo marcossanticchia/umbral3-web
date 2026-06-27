@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMBRAL 3 — Del instinto al tablero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d2025;
+    --ink-2:#262a31;
+    --paper:#e8e6e0;
+    --paper-2:#f1efe9;
+    --brass:#c1872f;
+    --brass-bright:#dca044;
+    --pine:#2f6b4f;
+    --pine-bright:#3f8a66;
+    --rust:#a8412c;
+    --steel:#8d897f;
+    --steel-line:#cfccc3;
+    --cream:#efece4;
+    --cream-soft:#bcb9b1;
+    --display:'Archivo',system-ui,sans-serif;
+    --body:'Hanken Grotesk',system-ui,sans-serif;
+    --mono:'Spline Sans Mono',ui-monospace,monospace;
+    --maxw:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--ink)}
+
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(232,230,224,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--steel-line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .mark{font-family:var(--display);font-weight:800;font-size:1.18rem;letter-spacing:.14em;display:flex;align-items:baseline;gap:.08em}
+  .mark b{font-weight:900}
+  .mark .three{color:var(--brass);font-weight:900}
+  .nav-cta{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);padding:9px 16px;transition:.18s;white-space:nowrap}
+  .nav-cta:hover{background:var(--ink);color:var(--cream)}
+  .nav-cta:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--ink);color:var(--cream);position:relative;overflow:hidden;border-bottom:3px solid var(--brass)}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ink-2) 1px,transparent 1px),linear-gradient(90deg,var(--ink-2) 1px,transparent 1px);background-size:46px 46px;opacity:.5;mask-image:radial-gradient(circle at 72% 38%,#000,transparent 70%)}
+  .hero-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:74px 0 84px}
+  .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-bright);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .eyebrow::before{content:"";width:34px;height:1.5px;background:var(--brass)}
+  h1{font-family:var(--display);font-weight:900;font-size:clamp(2.5rem,5.4vw,4.15rem);line-height:.98;letter-spacing:-.018em}
+  h1 .soft{color:var(--cream-soft);font-weight:700}
+  .lead{font-size:clamp(1.04rem,1.6vw,1.2rem);color:#d8d4cb;max-width:30em;margin-top:26px}
+  .lead b{color:var(--cream);font-weight:600}
+  .hero-actions{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:.01em;padding:15px 26px;background:var(--brass);color:var(--ink);transition:.18s;border:none;cursor:pointer}
+  .btn:hover{background:var(--brass-bright);transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+  .btn-ghost{font-family:var(--mono);font-size:.82rem;letter-spacing:.04em;color:var(--cream-soft);border-bottom:1px solid var(--steel);padding-bottom:3px}
+  .btn-ghost:hover{color:var(--cream)}
+
+  /* ---------- gauge ---------- */
+  .gauge-card{justify-self:center;width:100%;max-width:420px}
+  .gauge-frame{background:linear-gradient(165deg,#22262d,#16191e);border:1px solid #34393f;border-radius:6px;padding:26px 24px 20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .gauge-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);margin-bottom:6px}
+  .gauge-top .dot{width:7px;height:7px;border-radius:50%;background:var(--pine-bright);box-shadow:0 0 10px var(--pine-bright);display:inline-block;margin-right:6px;animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  svg.gauge{width:100%;height:auto;display:block}
+  .needle{transform-origin:200px 200px;transform-box:view-box;animation:sweep 2.4s cubic-bezier(.32,1.18,.38,1) .35s both}
+  @keyframes sweep{0%{transform:rotate(-56deg)}68%{transform:rotate(63deg)}84%{transform:rotate(49deg)}100%{transform:rotate(55deg)}}
+  .readout{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #34393f;margin-top:8px;padding-top:14px}
+  .readout .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--steel)}
+  .readout .val{font-family:var(--mono);font-weight:600;font-size:1.9rem;color:var(--pine-bright);line-height:1}
+  .readout .val::after{content:"";display:inline}
+  .ej{font-family:var(--mono);font-size:.6rem;color:var(--steel);letter-spacing:.08em;text-align:right;margin-top:8px}
+
+  /* ---------- manifesto ---------- */
+  .manifesto{background:var(--paper-2);border-bottom:1px solid var(--steel-line)}
+  .manifesto-inner{padding:70px 0;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start}
+  .man-tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);writing-mode:vertical-rl;transform:rotate(180deg);align-self:stretch}
+  .man-body p{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,3.1vw,2.3rem);line-height:1.18;letter-spacing:-.01em;max-width:18em}
+  .man-body p .hl{color:var(--brass);font-weight:800}
+  .man-body .small{font-family:var(--body);font-weight:400;font-size:1.05rem;color:#4a4d52;max-width:34em;margin-top:24px;line-height:1.6}
+
+  /* ---------- origin / trípode ---------- */
+  .origin{background:var(--ink);color:var(--cream);padding:86px 0;border-top:1px solid #343941}
+  .origin-top{max-width:46em;margin:0 auto;text-align:center}
+  .torii{margin:0 auto 24px;display:block}
+  .origin .eyebrow{justify-content:center}
+  .origin h2{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,3.6vw,2.7rem);letter-spacing:-.012em;margin-bottom:22px;line-height:1}
+  .origin .story{color:#d2cfc6;font-size:1.08rem;line-height:1.66}
+  .origin .story b{color:var(--cream);font-weight:600}
+  .tripod-note{font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--brass-bright);margin-top:30px;text-transform:uppercase}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid #343941}
+  .pillar{padding:30px 26px;border-right:1px solid #343941;text-align:left}
+  .pillar:last-child{border-right:none}
+  .pillar .pn{font-family:var(--mono);font-size:.82rem;color:var(--brass-bright);letter-spacing:.08em;font-weight:600}
+  .pillar h3{font-family:var(--display);font-weight:800;font-size:1.32rem;margin:12px 0 10px}
+  .pillar p{color:#bdbab2;font-size:.95rem;line-height:1.56}
+
+  /* ---------- ladder ---------- */
+  .ladder{padding:84px 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+  .sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.01em;line-height:1}
+  .sec-head .note{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--steel);text-transform:uppercase;max-width:24em;text-align:right}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink)}
+  .step{padding:30px 26px 34px;border-right:1px solid var(--steel-line);position:relative}
+  .step:last-child{border-right:none}
+  .step .num{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--brass);font-weight:600}
+  .step .umbral-bar{height:3px;width:38px;background:var(--ink);margin:18px 0}
+  .step:nth-child(1) .umbral-bar{background:var(--rust)}
+  .step:nth-child(2) .umbral-bar{background:var(--brass)}
+  .step:nth-child(3) .umbral-bar{background:var(--pine)}
+  .step h3{font-family:var(--display);font-weight:800;font-size:1.34rem;line-height:1.05;margin-bottom:12px}
+  .step .when{font-family:var(--mono);font-size:.72rem;color:var(--steel);letter-spacing:.04em;margin-bottom:14px}
+  .step p{font-size:.98rem;color:#3f4247;line-height:1.6}
+  .step p b{color:var(--ink)}
+
+  /* ---------- quiénes ---------- */
+  .who{background:var(--ink);color:var(--cream);padding:84px 0}
+  .who h2{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:8px}
+  .who .sub{color:var(--cream-soft);max-width:40em;margin-bottom:46px;font-size:1.05rem}
+  .domains{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #343941}
+  .domain{padding:30px 26px 32px;border-right:1px solid #343941}
+  .domain:last-child{border-right:none}
+  .dlabel{font-family:var(--display);font-weight:800;font-size:1.45rem;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+  .dlabel::before{content:"";width:13px;height:13px;background:var(--brass);transform:rotate(45deg);flex:0 0 auto}
+  .domain ul{list-style:none}
+  .domain li{font-size:1rem;color:#d2cfc6;padding:11px 0 11px 22px;border-bottom:1px solid #2c3138;position:relative}
+  .domain li:last-child{border-bottom:none}
+  .domain li::before{content:"";position:absolute;left:0;top:18px;width:9px;height:1.5px;background:var(--brass)}
+
+  /* ---------- closing ---------- */
+  .close{background:var(--brass);color:var(--ink);padding:74px 0}
+  .close-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .close h2{font-family:var(--display);font-weight:900;font-size:clamp(1.9rem,4vw,3rem);line-height:1.02;letter-spacing:-.015em;max-width:14em}
+  .close p{font-size:1.05rem;margin-top:14px;max-width:30em;color:#3a2e15}
+  .btn-dark{font-family:var(--display);font-weight:700;font-size:1.05rem;padding:17px 30px;background:var(--ink);color:var(--cream);transition:.18s;white-space:nowrap}
+  .btn-dark:hover{background:#000;transform:translateY(-2px)}
+  .btn-dark:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:var(--cream-soft);padding:40px 0;border-top:1px solid #343941}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em}
+  .foot .mark{color:var(--cream)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:40px;padding:54px 0 64px}
+    .gauge-card{order:-1;max-width:340px}
+    .manifesto-inner{grid-template-columns:1fr;gap:22px}
+    .man-tag{writing-mode:horizontal-tb;transform:none}
+    .steps{grid-template-columns:1fr}
+    .step{border-right:none;border-bottom:1px solid var(--steel-line)}
+    .step:last-child{border-bottom:none}
+    .domains{grid-template-columns:1fr}
+    .domain{border-right:none;border-bottom:1px solid #343941}
+    .domain:last-child{border-bottom:none}
+    .pillars{grid-template-columns:1fr}
+    .pillar{border-right:none;border-bottom:1px solid #343941}
+    .pillar:last-child{border-bottom:none}
+    .sec-head .note{text-align:left}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .needle{animation:none;transform:rotate(55deg)}
+    .reveal{opacity:1;transform:none;transition:none}
+    .gauge-top .dot{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="mark"><b>UMBRAL</b><span class="three">3</span></div>
+    <a class="nav-cta" href="#contacto">Radiografía de Margen</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Ingeniería industrial para PyMEs que ya facturan</div>
+      <h1>De PyME a empresa.<br><span class="soft">Sin perder lo que te<br>trajo hasta acá.</span></h1>
+      <p class="lead">Tu negocio funciona porque lo llevás en la cabeza. Con márgenes finos, eso ya no alcanza. Te ayudamos a <b>cruzar el umbral</b>: del instinto al tablero, sobre el oficio que ya tenés.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contacto">Pedí tu Radiografía de Margen</a>
+        <a class="btn-ghost" href="#como">Cómo trabajamos</a>
+      </div>
+    </div>
+
+    <div class="gauge-card">
+      <div class="gauge-frame">
+        <div class="gauge-top"><span><span class="dot"></span>Margen real</span><span>UMBRAL 3</span></div>
+        <svg class="gauge" viewBox="0 0 400 250" role="img" aria-label="Manómetro de margen: la aguja cruza el umbral de rentabilidad hacia la zona verde.">
+          <!-- zona bajo el umbral -->
+          <path d="M 60 200 A 140 140 0 0 1 200 60" fill="none" stroke="#a8412c" stroke-width="18" stroke-linecap="butt"/>
+          <!-- zona sobre el umbral -->
+          <path d="M 200 60 A 140 140 0 0 1 340 200" fill="none" stroke="#2f6b4f" stroke-width="18" stroke-linecap="butt"/>
+          <!-- ticks -->
+          <g stroke="#5a606a" stroke-width="2">
+            <line x1="60" y1="200" x2="78" y2="200"/>
+            <line x1="200" y1="60" x2="200" y2="42"/>
+            <line x1="340" y1="200" x2="322" y2="200"/>
+            <line x1="103" y1="118" x2="116" y2="128"/>
+            <line x1="297" y1="118" x2="284" y2="128"/>
+          </g>
+          <!-- umbral mark -->
+          <line x1="200" y1="38" x2="200" y2="80" stroke="#dca044" stroke-width="3"/>
+          <text x="200" y="30" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="13" letter-spacing="2" fill="#dca044">UMBRAL</text>
+          <text x="74" y="226" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="11" fill="#8d897f">PIERDE</text>
+          <text x="326" y="226" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="11" fill="#8d897f">GANA</text>
+          <!-- needle -->
+          <g class="needle">
+            <polygon points="200,200 194,206 200,72 206,206" fill="#efece4"/>
+            <circle cx="200" cy="200" r="11" fill="#16191e" stroke="#efece4" stroke-width="2.5"/>
+          </g>
+        </svg>
+        <div class="readout">
+          <span class="lbl">Margen<br>identificado</span>
+          <span class="val" id="val">+0%</span>
+        </div>
+        <div class="ej">Ejemplo ilustrativo de un diagnóstico.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="wrap manifesto-inner reveal">
+    <div class="man-tag">No venimos a enseñarte tu negocio</div>
+    <div class="man-body">
+      <p>Lo que construiste, lo construiste vos. Con aguante, instinto y oficio. <span class="hl">Eso no se toca.</span> Nosotros le ponemos números, para que no dependa solo de tu cabeza.</p>
+      <p class="small">Sabés cuál es tu producto fuerte, a quién le comprás mejor, dónde apretar. Lo que falta no es talento: es el número que confirma —o corrige— lo que ya intuís, y un tablero para verlo todos los meses sin tener que adivinar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN / TRÍPODE -->
+<section class="origin">
+  <div class="wrap">
+    <div class="origin-top reveal">
+      <svg class="torii" width="74" height="66" viewBox="0 0 74 66" fill="none" aria-hidden="true">
+        <path d="M5 14 Q37 6 69 14" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
+        <line x1="9" y1="20" x2="65" y2="20" stroke="#c1872f" stroke-width="2"/>
+        <line x1="21" y1="15" x2="21" y2="60" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
+        <line x1="53" y1="15" x2="53" y2="60" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
+        <line x1="14" y1="30" x2="60" y2="30" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
+      </svg>
+      <div class="eyebrow">Por qué UMBRAL 3</div>
+      <h2>Un umbral es un cruce.</h2>
+      <p class="story">De un lado, una empresa que depende de la cabeza del dueño, sin procesos claros. Del otro, una organizada y profesionalizada, que decide con datos. Ese pasaje es un umbral —y cruzarlo no debería costar lo que vale una consultoría premium que ninguna PyME puede pagar. <b>UMBRAL 3 nace de más de 20 años junto a PyMEs</b>, con una convicción: con herramientas profesionales al alcance, el cambio se ve en el corto plazo y se sostiene en el tiempo.</p>
+      <div class="tripod-note">El 3 es un trípode · sin una pata, se tambalea</div>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="pn">01</div>
+        <h3>Personas</h3>
+        <p>El centro de toda transición. Ninguna mejora se sostiene si la gente que la trabaja no la hace propia.</p>
+      </div>
+      <div class="pillar">
+        <div class="pn">02</div>
+        <h3>Procesos</h3>
+        <p>La estructura que da coherencia y libera al negocio de depender de una sola cabeza.</p>
+      </div>
+      <div class="pillar">
+        <div class="pn">03</div>
+        <h3>Tecnología</h3>
+        <p>Las herramientas que potencian y ponen los datos a trabajar a tu favor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LADDER -->
+<section class="ladder" id="como">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Tres pasos para cruzar el umbral</h2>
+      <div class="note">Cada peldaño se entrega solo. El que paga, sigue al siguiente.</div>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="num">01 — DIAGNÓSTICO</div>
+        <div class="umbral-bar"></div>
+        <h3>Radiografía de Margen</h3>
+        <div class="when">2 a 3 semanas</div>
+        <p>Tomamos tus datos reales y te devolvemos <b>tu costo y tu margen verdaderos, producto por producto.</b> Casi siempre aparece la sorpresa: algo que creías ganador y en realidad te come plata.</p>
+      </div>
+      <div class="step">
+        <div class="num">02 — SISTEMA</div>
+        <div class="umbral-bar"></div>
+        <h3>Sistema de costeo</h3>
+        <div class="when">2 a 4 meses · por proyecto</div>
+        <p>Armamos la estructura para que puedas costear cualquier producto y <b>poner precio con el margen que vos decidís</b>, no el que quede. Con fechas, entregables y seguimiento.</p>
+      </div>
+      <div class="step">
+        <div class="num">03 — TABLERO</div>
+        <div class="umbral-bar"></div>
+        <h3>Control mensual</h3>
+        <div class="when">Abono · continuo</div>
+        <p>Con los vaivenes de la economía, tus costos y precios se mueven solos. Mantenemos el tablero al día para que <b>no pierdas margen sin darte cuenta</b> y decidas con el número, no con la corazonada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DE QUÉ ESTAMOS HECHOS -->
+<section class="who">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Del mundo real, no del manual.</h2>
+      <p class="sub">UMBRAL 3 reúne dos disciplinas bajo un mismo techo —ingeniería y legales—, forjadas adentro de la PyME: en la planta, en los procesos, en los problemas que aparecen de verdad. No traemos teoría de libro: traemos lo que funciona cuando hay que resolver.</p>
+    </div>
+    <div class="domains reveal">
+      <div class="domain">
+        <div class="dlabel">Ingeniería</div>
+        <ul>
+          <li>Dirección de planta y operaciones</li>
+          <li>Procesos reales, no de manual</li>
+          <li>Costos y estructura de costeo</li>
+          <li>Sistemas de gestión y mejora continua</li>
+        </ul>
+      </div>
+      <div class="domain">
+        <div class="dlabel">Legales</div>
+        <ul>
+          <li>Certificaciones y normas</li>
+          <li>Auditorías de PyMEs</li>
+          <li>Encuadre legal de los problemas reales</li>
+          <li>Calificación como proveedor de grandes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="close" id="contacto">
+  <div class="wrap close-inner">
+    <div>
+      <h2>Empecemos por saber tu número.</h2>
+      <p>Una Radiografía de Margen, sin compromiso de seguir. Si lo que encontramos no te mueve a actuar, no perdiste casi nada.</p>
+    </div>
+    <a class="btn-dark" href="mailto:hola@umbral3.com">Pedir la Radiografía</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mark"><b>UMBRAL</b> <span style="color:var(--brass)">3</span></div>
+    <div>hola@umbral3.com &nbsp;·&nbsp; +54 9 ___ ___ &nbsp;·&nbsp; Argentina</div>
+    <div>Personas · Procesos · Tecnología</div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // count-up readout synced with needle sweep
+  const val=document.getElementById('val');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const target=22;
+  if(reduce){val.textContent='+'+target+'%';}
+  else{
+    let start=null;const dur=1800;const delay=350;
+    function step(ts){
+      if(!start)start=ts;
+      const t=Math.min(1,(ts-start)/dur);
+      const eased=1-Math.pow(1-t,2.2);
+      val.textContent='+'+Math.round(eased*target)+'%';
+      if(t<1)requestAnimationFrame(step);
+    }
+    setTimeout(()=>requestAnimationFrame(step),delay);
+  }
+</script>
+</body>
+</html>
