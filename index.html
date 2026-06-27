@@ -148,6 +148,24 @@
   .btn-dark:hover{background:#000;transform:translateY(-2px)}
   .btn-dark:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 
+  /* ---------- contact form ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .contact-copy h2{font-family:var(--display);font-weight:900;font-size:clamp(1.9rem,4vw,3rem);line-height:1.02;letter-spacing:-.015em;max-width:12em}
+  .contact-copy p{font-size:1.05rem;margin-top:14px;max-width:26em;color:#3a2e15}
+  .contact-card{background:var(--ink);border-radius:6px;padding:28px;box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
+  .contact-form{display:flex;flex-direction:column;gap:14px}
+  .hp{display:none}
+  .field label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-bright);display:block;margin-bottom:6px}
+  .field .opt{color:var(--steel);letter-spacing:.04em}
+  .field input,.field textarea{width:100%;background:#22262d;border:1px solid #343941;color:var(--cream);font-family:var(--body);font-size:1rem;padding:11px 13px;border-radius:4px;-webkit-appearance:none}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(193,135,47,.25)}
+  .field textarea{resize:vertical;min-height:78px}
+  .contact-card button{font-family:var(--display);font-weight:700;font-size:1.05rem;padding:14px;background:var(--brass);color:var(--ink);border:none;cursor:pointer;transition:.18s;margin-top:4px}
+  .contact-card button:hover{background:var(--brass-bright)}
+  .contact-card button:focus-visible{outline:3px solid var(--cream);outline-offset:2px}
+  .form-ok{background:var(--ink);border-radius:6px;padding:38px 28px;color:var(--cream);font-size:1.12rem;text-align:center;line-height:1.5}
+  .form-ok strong{color:var(--brass-bright)}
+
   /* ---------- footer ---------- */
   footer{background:var(--ink);color:var(--cream-soft);padding:40px 0;border-top:1px solid #343941}
   .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em}
@@ -172,6 +190,7 @@
     .pillar{border-right:none;border-bottom:1px solid #343941}
     .pillar:last-child{border-bottom:none}
     .sec-head .note{text-align:left}
+    .contact-grid{grid-template-columns:1fr;gap:28px}
   }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -186,7 +205,7 @@
 <header>
   <div class="wrap nav">
     <div class="mark"><b>UMBRAL</b><span class="three">3</span></div>
-    <a class="nav-cta" href="https://wa.me/5492923436776?text=Hola,%20quiero%20pedir%20una%20Radiograf%C3%ADa%20de%20Margen" target="_blank" rel="noopener">Radiografía de Margen</a>
+    <a class="nav-cta" href="#contacto">Radiografía de Margen</a>
   </div>
 </header>
 
@@ -198,7 +217,7 @@
       <h1>De PyME a empresa.<br><span class="soft">Sin perder lo que te<br>trajo hasta acá.</span></h1>
       <p class="lead">Tu negocio funciona porque lo llevás en la cabeza. Con márgenes finos, eso ya no alcanza. Te ayudamos a <b>cruzar el umbral</b>: del instinto al tablero, sobre el oficio que ya tenés.</p>
       <div class="hero-actions">
-        <a class="btn" href="https://wa.me/5492923436776?text=Hola,%20quiero%20pedir%20una%20Radiograf%C3%ADa%20de%20Margen" target="_blank" rel="noopener">Pedí tu Radiografía de Margen</a>
+        <a class="btn" href="#contacto">Pedí tu Radiografía de Margen</a>
         <a class="btn-ghost" href="#como">Cómo trabajamos</a>
       </div>
     </div>
@@ -350,14 +369,41 @@
   </div>
 </section>
 
-<!-- CLOSING -->
+<!-- CONTACTO -->
 <section class="close" id="contacto">
-  <div class="wrap close-inner">
-    <div>
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
       <h2>Empecemos por saber tu número.</h2>
-      <p>Una Radiografía de Margen, sin compromiso de seguir. Si lo que encontramos no te mueve a actuar, no perdiste casi nada.</p>
+      <p>Dejanos tus datos y coordinamos tu Radiografía de Margen. Sin compromiso de seguir.</p>
     </div>
-    <a class="btn-dark" href="https://wa.me/5492923436776?text=Hola,%20quiero%20pedir%20una%20Radiograf%C3%ADa%20de%20Margen" target="_blank" rel="noopener">Pedir la Radiografía</a>
+    <div class="contact-card">
+      <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+        <input type="hidden" name="form-name" value="contacto" />
+        <p class="hp"><label>No llenar si sos humano: <input name="bot-field" /></label></p>
+        <div class="field">
+          <label for="f-nombre">Nombre</label>
+          <input id="f-nombre" type="text" name="nombre" required />
+        </div>
+        <div class="field">
+          <label for="f-empresa">Empresa <span class="opt">(opcional)</span></label>
+          <input id="f-empresa" type="text" name="empresa" />
+        </div>
+        <div class="field">
+          <label for="f-tel">Teléfono / WhatsApp</label>
+          <input id="f-tel" type="tel" name="telefono" required />
+        </div>
+        <div class="field">
+          <label for="f-email">Email <span class="opt">(opcional)</span></label>
+          <input id="f-email" type="email" name="email" />
+        </div>
+        <div class="field">
+          <label for="f-msg">¿Qué te gustaría mejorar? <span class="opt">(opcional)</span></label>
+          <textarea id="f-msg" name="mensaje"></textarea>
+        </div>
+        <button type="submit">Enviar consulta</button>
+      </form>
+      <div class="form-ok" hidden><strong>¡Gracias!</strong> Recibimos tu consulta y te contactamos a la brevedad.</div>
+    </div>
   </div>
 </section>
 
@@ -389,6 +435,23 @@
       if(t<1)requestAnimationFrame(step);
     }
     setTimeout(()=>requestAnimationFrame(step),delay);
+  }
+
+  // contact form: enviar sin salir de la página
+  const cf=document.querySelector('form[name="contacto"]');
+  if(cf){
+    cf.addEventListener('submit',function(e){
+      e.preventDefault();
+      const body=new URLSearchParams(new FormData(cf)).toString();
+      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+        .then(function(){
+          cf.style.display='none';
+          const ok=document.querySelector('.form-ok');
+          ok.hidden=false;
+          ok.scrollIntoView({behavior:'smooth',block:'center'});
+        })
+        .catch(function(){alert('No se pudo enviar. Probá de nuevo en un momento.');});
+    });
   }
 </script>
 </body>
