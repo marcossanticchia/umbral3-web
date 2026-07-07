@@ -4,24 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UMBRAL 3 — Del instinto al tablero</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="description" content="UMBRAL 3 — Soluciones de gestión para PyMEs. Del instinto al tablero: costos, procesos y previsibilidad.">
+<meta property="og:title" content="UMBRAL 3 — Soluciones de gestión">
+<meta property="og:description" content="Te ayudamos a cruzar el umbral: del instinto al tablero, sobre el oficio que ya tenés.">
+<meta property="og:image" content="logo-simbolo.png">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1d2025;
-    --ink-2:#262a31;
-    --paper:#e8e6e0;
-    --paper-2:#f1efe9;
-    --brass:#c1872f;
-    --brass-bright:#dca044;
-    --pine:#2f6b4f;
-    --pine-bright:#3f8a66;
-    --rust:#a8412c;
-    --steel:#8d897f;
-    --steel-line:#cfccc3;
-    --cream:#efece4;
-    --cream-soft:#bcb9b1;
+    --ink:#15262b;
+    --ink-2:#1e3439;
+    --paper:#eae8e2;
+    --paper-2:#f2f0ea;
+    --brass:#ec8a2c;
+    --brass-bright:#f59d45;
+    --pine:#2f8079;
+    --pine-bright:#3f978f;
+    --teal-light:#57a3a0;
+    --teal-deep:#0f4a47;
+    --rust:#b0542f;
+    --steel:#8a938f;
+    --steel-line:#cdccc4;
+    --cream:#eef0ec;
+    --cream-soft:#a6b4b1;
     --display:'Archivo',system-ui,sans-serif;
     --body:'Hanken Grotesk',system-ui,sans-serif;
     --mono:'Spline Sans Mono',ui-monospace,monospace;
@@ -47,6 +55,13 @@
   .mark{font-family:var(--display);font-weight:800;font-size:1.18rem;letter-spacing:.14em;display:flex;align-items:baseline;gap:.08em}
   .mark b{font-weight:900}
   .mark .three{color:var(--brass);font-weight:900}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand-img{height:42px;width:auto;display:block}
+  .brand-mark{width:34px;height:34px;flex:0 0 auto}
+  .brand-text{display:flex;flex-direction:column;line-height:1}
+  .brand-name{font-family:var(--display);font-weight:900;font-size:1.14rem;letter-spacing:.11em;color:var(--ink)}
+  .brand-name sup{color:var(--brass);font-size:.6em;font-weight:900;top:-.55em}
+  .brand-tag{font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);margin-top:4px}
   .nav-cta{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);padding:9px 16px;transition:.18s;white-space:nowrap}
   .nav-cta:hover{background:var(--ink);color:var(--cream)}
   .nav-cta:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
@@ -70,14 +85,14 @@
 
   /* ---------- gauge ---------- */
   .gauge-card{justify-self:center;width:100%;max-width:420px}
-  .gauge-frame{background:linear-gradient(165deg,#22262d,#16191e);border:1px solid #34393f;border-radius:6px;padding:26px 24px 20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .gauge-frame{background:linear-gradient(165deg,#1d343a,#122228);border:1px solid #294449;border-radius:6px;padding:26px 24px 20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
   .gauge-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);margin-bottom:6px}
   .gauge-top .dot{width:7px;height:7px;border-radius:50%;background:var(--pine-bright);box-shadow:0 0 10px var(--pine-bright);display:inline-block;margin-right:6px;animation:pulse 2.4s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
   svg.gauge{width:100%;height:auto;display:block}
   .needle{transform-origin:200px 200px;transform-box:view-box;animation:sweep 2.4s cubic-bezier(.32,1.18,.38,1) .35s both}
   @keyframes sweep{0%{transform:rotate(-56deg)}68%{transform:rotate(63deg)}84%{transform:rotate(49deg)}100%{transform:rotate(55deg)}}
-  .readout{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #34393f;margin-top:8px;padding-top:14px}
+  .readout{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #294449;margin-top:8px;padding-top:14px}
   .readout .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--steel)}
   .readout .val{font-family:var(--mono);font-weight:600;font-size:1.9rem;color:var(--pine-bright);line-height:1}
   .readout .val::after{content:"";display:inline}
@@ -92,7 +107,7 @@
   .man-body .small{font-family:var(--body);font-weight:400;font-size:1.05rem;color:#4a4d52;max-width:34em;margin-top:24px;line-height:1.6}
 
   /* ---------- origin / trípode ---------- */
-  .origin{background:var(--ink);color:var(--cream);padding:86px 0;border-top:1px solid #343941}
+  .origin{background:var(--ink);color:var(--cream);padding:86px 0;border-top:1px solid #284247}
   .origin-top{max-width:46em;margin:0 auto;text-align:center}
   .torii{margin:0 auto 24px;display:block}
   .origin .eyebrow{justify-content:center}
@@ -100,8 +115,8 @@
   .origin .story{color:#d2cfc6;font-size:1.08rem;line-height:1.66}
   .origin .story b{color:var(--cream);font-weight:600}
   .tripod-note{font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--brass-bright);margin-top:30px;text-transform:uppercase}
-  .pillars{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid #343941}
-  .pillar{padding:30px 26px;border-right:1px solid #343941;text-align:left}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid #284247}
+  .pillar{padding:30px 26px;border-right:1px solid #284247;text-align:left}
   .pillar:last-child{border-right:none}
   .pillar .pn{font-family:var(--mono);font-size:.82rem;color:var(--brass-bright);letter-spacing:.08em;font-weight:600}
   .pillar h3{font-family:var(--display);font-weight:800;font-size:1.32rem;margin:12px 0 10px}
@@ -129,13 +144,13 @@
   .who{background:var(--ink);color:var(--cream);padding:84px 0}
   .who h2{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:8px}
   .who .sub{color:var(--cream-soft);max-width:40em;margin-bottom:46px;font-size:1.05rem}
-  .domains{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #343941}
-  .domain{padding:30px 26px 32px;border-right:1px solid #343941}
+  .domains{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #284247}
+  .domain{padding:30px 26px 32px;border-right:1px solid #284247}
   .domain:last-child{border-right:none}
   .dlabel{font-family:var(--display);font-weight:800;font-size:1.45rem;margin-bottom:16px;display:flex;align-items:center;gap:12px}
   .dlabel::before{content:"";width:13px;height:13px;background:var(--brass);transform:rotate(45deg);flex:0 0 auto}
   .domain ul{list-style:none}
-  .domain li{font-size:1rem;color:#d2cfc6;padding:11px 0 11px 22px;border-bottom:1px solid #2c3138;position:relative}
+  .domain li{font-size:1rem;color:#d2cfc6;padding:11px 0 11px 22px;border-bottom:1px solid #22393c;position:relative}
   .domain li:last-child{border-bottom:none}
   .domain li::before{content:"";position:absolute;left:0;top:18px;width:9px;height:1.5px;background:var(--brass)}
 
@@ -157,7 +172,7 @@
   .hp{display:none}
   .field label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-bright);display:block;margin-bottom:6px}
   .field .opt{color:var(--steel);letter-spacing:.04em}
-  .field input,.field textarea{width:100%;background:#22262d;border:1px solid #343941;color:var(--cream);font-family:var(--body);font-size:1rem;padding:11px 13px;border-radius:4px;-webkit-appearance:none}
+  .field input,.field textarea{width:100%;background:#1d343a;border:1px solid #294449;color:var(--cream);font-family:var(--body);font-size:1rem;padding:11px 13px;border-radius:4px;-webkit-appearance:none}
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(193,135,47,.25)}
   .field textarea{resize:vertical;min-height:78px}
   .contact-card button{font-family:var(--display);font-weight:700;font-size:1.05rem;padding:14px;background:var(--brass);color:var(--ink);border:none;cursor:pointer;transition:.18s;margin-top:4px}
@@ -167,7 +182,7 @@
   .form-ok strong{color:var(--brass-bright)}
 
   /* ---------- footer ---------- */
-  footer{background:var(--ink);color:var(--cream-soft);padding:40px 0;border-top:1px solid #343941}
+  footer{background:var(--ink);color:var(--cream-soft);padding:40px 0;border-top:1px solid #284247}
   .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em}
   .foot .mark{color:var(--cream)}
 
@@ -184,10 +199,10 @@
     .step{border-right:none;border-bottom:1px solid var(--steel-line)}
     .step:last-child{border-bottom:none}
     .domains{grid-template-columns:1fr}
-    .domain{border-right:none;border-bottom:1px solid #343941}
+    .domain{border-right:none;border-bottom:1px solid #284247}
     .domain:last-child{border-bottom:none}
     .pillars{grid-template-columns:1fr}
-    .pillar{border-right:none;border-bottom:1px solid #343941}
+    .pillar{border-right:none;border-bottom:1px solid #284247}
     .pillar:last-child{border-bottom:none}
     .sec-head .note{text-align:left}
     .contact-grid{grid-template-columns:1fr;gap:28px}
@@ -202,9 +217,11 @@
 </head>
 <body>
 
-<header>
+<header id="top">
   <div class="wrap nav">
-    <div class="mark"><b>UMBRAL</b><span class="three">3</span></div>
+    <a href="#top" class="brand" aria-label="UMBRAL 3 — Soluciones de gestión">
+      <img class="brand-img" src="logo-horizontal.png" alt="UMBRAL 3 — Soluciones de gestión" />
+    </a>
     <a class="nav-cta" href="#contacto">Radiografía de Margen</a>
   </div>
 </header>
@@ -227,11 +244,11 @@
         <div class="gauge-top"><span><span class="dot"></span>Margen real</span><span>UMBRAL 3</span></div>
         <svg class="gauge" viewBox="0 0 400 250" role="img" aria-label="Manómetro de margen: la aguja cruza el umbral de rentabilidad hacia la zona verde.">
           <!-- zona bajo el umbral -->
-          <path d="M 60 200 A 140 140 0 0 1 200 60" fill="none" stroke="#a8412c" stroke-width="18" stroke-linecap="butt"/>
+          <path d="M 60 200 A 140 140 0 0 1 200 60" fill="none" stroke="var(--rust)" stroke-width="18" stroke-linecap="butt"/>
           <!-- zona sobre el umbral -->
-          <path d="M 200 60 A 140 140 0 0 1 340 200" fill="none" stroke="#2f6b4f" stroke-width="18" stroke-linecap="butt"/>
+          <path d="M 200 60 A 140 140 0 0 1 340 200" fill="none" stroke="var(--pine)" stroke-width="18" stroke-linecap="butt"/>
           <!-- ticks -->
-          <g stroke="#5a606a" stroke-width="2">
+          <g stroke="#3f5b5c" stroke-width="2">
             <line x1="60" y1="200" x2="78" y2="200"/>
             <line x1="200" y1="60" x2="200" y2="42"/>
             <line x1="340" y1="200" x2="322" y2="200"/>
@@ -239,14 +256,14 @@
             <line x1="297" y1="118" x2="284" y2="128"/>
           </g>
           <!-- umbral mark -->
-          <line x1="200" y1="38" x2="200" y2="80" stroke="#dca044" stroke-width="3"/>
-          <text x="200" y="30" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="13" letter-spacing="2" fill="#dca044">UMBRAL</text>
-          <text x="74" y="226" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="11" fill="#8d897f">PIERDE</text>
-          <text x="326" y="226" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="11" fill="#8d897f">GANA</text>
+          <line x1="200" y1="38" x2="200" y2="80" stroke="var(--brass-bright)" stroke-width="3"/>
+          <text x="200" y="30" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="13" letter-spacing="2" fill="var(--brass-bright)">UMBRAL</text>
+          <text x="74" y="226" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="11" fill="var(--steel)">PIERDE</text>
+          <text x="326" y="226" text-anchor="middle" font-family="Spline Sans Mono, monospace" font-size="11" fill="var(--steel)">GANA</text>
           <!-- needle -->
           <g class="needle">
-            <polygon points="200,200 194,206 200,72 206,206" fill="#efece4"/>
-            <circle cx="200" cy="200" r="11" fill="#16191e" stroke="#efece4" stroke-width="2.5"/>
+            <polygon points="200,200 194,206 200,72 206,206" fill="var(--cream)"/>
+            <circle cx="200" cy="200" r="11" fill="var(--ink)" stroke="var(--cream)" stroke-width="2.5"/>
           </g>
         </svg>
         <div class="readout">
@@ -274,13 +291,7 @@
 <section class="origin">
   <div class="wrap">
     <div class="origin-top reveal">
-      <svg class="torii" width="74" height="66" viewBox="0 0 74 66" fill="none" aria-hidden="true">
-        <path d="M5 14 Q37 6 69 14" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
-        <line x1="9" y1="20" x2="65" y2="20" stroke="#c1872f" stroke-width="2"/>
-        <line x1="21" y1="15" x2="21" y2="60" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
-        <line x1="53" y1="15" x2="53" y2="60" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
-        <line x1="14" y1="30" x2="60" y2="30" stroke="#c1872f" stroke-width="3.6" stroke-linecap="round"/>
-      </svg>
+      <img class="torii" src="logo-simbolo.png" alt="Símbolo UMBRAL 3" width="92" height="92" />
       <div class="eyebrow">Por qué UMBRAL 3</div>
       <h2>Un umbral es un cruce.</h2>
       <p class="story">De un lado, una empresa que depende de la cabeza del dueño, sin procesos claros. Del otro, una organizada y profesionalizada, que decide con datos. Ese pasaje es un umbral —y cruzarlo no debería costar lo que vale una consultoría premium que ninguna PyME puede pagar. <b>UMBRAL 3 nace de más de 20 años junto a PyMEs</b>, con una convicción: con herramientas profesionales al alcance, el cambio se ve en el corto plazo y se sostiene en el tiempo.</p>
@@ -344,24 +355,24 @@
   <div class="wrap">
     <div class="reveal">
       <h2>Del mundo real, no del manual.</h2>
-      <p class="sub">UMBRAL 3 reúne dos disciplinas bajo un mismo techo —ingeniería y legales—, forjadas adentro de la PyME: en la planta, en los procesos, en los problemas que aparecen de verdad. No traemos teoría de libro: traemos lo que funciona cuando hay que resolver.</p>
+      <p class="sub">UMBRAL 3 combina ingeniería, gestión y procesos, forjados adentro de la PyME: en la planta, en los números, en los problemas que aparecen de verdad. No traemos teoría de libro: traemos lo que funciona cuando hay que resolver.</p>
     </div>
     <div class="domains reveal">
       <div class="domain">
-        <div class="dlabel">Ingeniería</div>
+        <div class="dlabel">Ingeniería y operaciones</div>
         <ul>
           <li>Dirección de planta y operaciones</li>
           <li>Procesos reales, no de manual</li>
           <li>Costos y estructura de costeo</li>
-          <li>Sistemas de gestión y mejora continua</li>
+          <li>Gestión de proyectos</li>
         </ul>
       </div>
       <div class="domain">
-        <div class="dlabel">Legales</div>
+        <div class="dlabel">Gestión y sistemas</div>
         <ul>
+          <li>Sistemas de gestión y mejora continua</li>
           <li>Certificaciones y normas</li>
-          <li>Auditorías de PyMEs</li>
-          <li>Encuadre legal de los problemas reales</li>
+          <li>Auditorías de sistemas y procesos</li>
           <li>Calificación como proveedor de grandes</li>
         </ul>
       </div>
@@ -409,7 +420,7 @@
 
 <footer>
   <div class="wrap foot">
-    <div class="mark"><b>UMBRAL</b> <span style="color:var(--brass)">3</span></div>
+    <div class="mark"><b>UMBRAL</b><sup style="color:var(--brass);font-size:.58em;top:-.5em;position:relative">3</sup> &nbsp;·&nbsp; Soluciones de gestión</div>
     <div>hola@umbral3.com &nbsp;·&nbsp; +54 9 ___ ___ &nbsp;·&nbsp; Argentina</div>
     <div>Personas · Procesos · Tecnología</div>
   </div>
