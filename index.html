@@ -196,6 +196,16 @@
   .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em}
   .foot .mark{color:var(--cream)}
 
+
+  /* ---------- media grid (texto + dibujo al lado) ---------- */
+  .media-row{display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center}
+  .media-art{width:300px;max-width:100%}
+  .media-art.wide{width:340px}
+  @media(max-width:860px){
+    .media-row{grid-template-columns:1fr;gap:0}
+    .media-art{display:none}
+  }
+
   /* ---------- reveal ---------- */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
@@ -334,11 +344,13 @@
 <!-- LADDER -->
 <section class="ladder" id="como">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Tres pasos para cruzar el umbral</h2>
-    </div>
-    <div class="reveal" style="max-width:340px;margin:0 auto 44px">
-      <svg width="100%" viewBox="0 0 340 200" role="img" aria-label="Gráfico de margen: barras que crecen desde la zona de pérdida hasta cruzar el umbral hacia la rentabilidad." style="display:block">
+    <div class="reveal media-row" style="margin-bottom:48px">
+      <div>
+        <div class="eyebrow" style="color:var(--brass);margin-bottom:18px">Diagnóstico · Sistema · Tablero</div>
+        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.01em;line-height:1">Tres pasos para cruzar el umbral</h2>
+        <p class="sub" style="color:#4a4d52;max-width:30em;margin-top:16px;margin-bottom:0">De la corazonada al número que confirma —o corrige— lo que ya intuís. Un método en tres etapas para dejar de decidir a ciegas.</p>
+      </div>
+      <div class="media-art wide"><svg width="100%" viewBox="0 0 340 200" role="img" aria-label="Gráfico de margen: barras que crecen desde la zona de pérdida hasta cruzar el umbral hacia la rentabilidad." style="display:block">
         <line x1="20" y1="70" x2="300" y2="70" stroke="var(--brass)" stroke-width="1" stroke-dasharray="4 4"/>
         <text x="304" y="74" font-family="var(--mono)" font-size="11" fill="var(--rust)">umbral</text>
         <rect x="34" y="120" width="34" height="50" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
@@ -347,7 +359,7 @@
         <rect x="214" y="34" width="34" height="136" fill="var(--pine)"/>
         <line x1="20" y1="170" x2="300" y2="170" stroke="var(--ink)" stroke-width="1"/>
         <text x="160" y="194" text-anchor="middle" font-family="var(--mono)" font-size="12" letter-spacing="1" fill="#3f4247">Del instinto al margen que decidís</text>
-      </svg>
+      </svg></div>
     </div>
     <div class="steps reveal">
       <div class="step">
@@ -414,12 +426,13 @@
      ============================================================ -->
 <section class="who" id="oilgas" style="border-top:1px solid #284247">
   <div class="wrap">
-    <div class="reveal">
-      <div class="eyebrow">Proveedores de Oil &amp; Gas y Minería · Argentina</div>
-      <h2>Evaluá tu empresa antes de calificar.</h2>
-      <p class="sub">¿Querés prestarle servicios a las grandes operadoras de Oil &amp; Gas o Minería pero no sabés si tu empresa está lista? Son sectores que califican a sus proveedores con criterios estrictos. Umbral3 te da un diagnóstico independiente, con el criterio real que aplican las operadoras, para que sepas dónde estás parado antes de iniciar cualquier proceso formal de calificación.</p>
-      <div class="reveal" style="max-width:300px;margin-top:34px">
-        <svg width="100%" viewBox="0 0 300 260" role="img" aria-label="Ícono de extracción en profundidad: capas de terreno atravesadas por un eje con torre, símbolo de Oil and Gas y Minería." style="display:block">
+    <div class="reveal media-row">
+      <div>
+        <div class="eyebrow">Proveedores de Oil &amp; Gas y Minería · Argentina</div>
+        <h2>Evaluá tu empresa antes de calificar.</h2>
+        <p class="sub" style="margin-bottom:0">¿Querés prestarle servicios a las grandes operadoras de Oil &amp; Gas o Minería pero no sabés si tu empresa está lista? Son sectores que califican a sus proveedores con criterios estrictos. Umbral3 te da un diagnóstico independiente, con el criterio real que aplican las operadoras, para que sepas dónde estás parado antes de iniciar cualquier proceso formal de calificación.</p>
+      </div>
+      <div class="media-art"><svg width="100%" viewBox="0 0 300 260" role="img" aria-label="Ícono de extracción en profundidad: capas de terreno atravesadas por un eje con torre, símbolo de Oil and Gas y Minería." style="display:block">
           <rect x="50" y="120" width="200" height="26" fill="none" stroke="var(--pine)" stroke-width="1.5"/>
           <rect x="50" y="152" width="200" height="26" fill="none" stroke="var(--pine)" stroke-width="1"/>
           <rect x="50" y="184" width="200" height="26" fill="none" stroke="var(--pine)" stroke-width="0.6"/>
@@ -436,8 +449,7 @@
           <circle cx="150" cy="58" r="4" fill="var(--brass-bright)"/>
           <circle cx="150" cy="184" r="5" fill="none" stroke="var(--brass-bright)" stroke-width="1.5"/>
           <text x="150" y="238" text-anchor="middle" font-family="var(--mono)" font-size="12" letter-spacing="1" fill="var(--cream-soft)">Extraer valor de la profundidad</text>
-        </svg>
-      </div>
+        </svg></div>
     </div>
 
     <!-- Diagnóstico gratuito: bloque destacado -->
