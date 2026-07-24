@@ -231,7 +231,7 @@
     <a href="#top" class="brand" aria-label="UMBRAL 3 — Soluciones de gestión">
       <img class="brand-img" src="logo-horizontal.png" alt="UMBRAL 3 — Soluciones de gestión" />
     </a>
-    <a class="nav-cta" href="#contacto">Radiografía de Margen</a>
+    <div style="display:flex;align-items:center;gap:18px"><a class="btn-ghost" href="#oilgas" style="font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:none;color:var(--ink)">Oil &amp; Gas · Minería</a><a class="nav-cta" href="#contacto">Radiografía de Margen</a></div>
   </div>
 </header>
 
@@ -389,6 +389,86 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     SECCIÓN OIL & GAS Y MINERÍA — Insertar entre </section> de .who
+     y <section class="close" id="contacto">
+     Usa las clases y variables ya existentes en la web.
+     ============================================================ -->
+<section class="who" id="oilgas" style="border-top:1px solid #284247">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Proveedores de Oil &amp; Gas y Minería · Argentina</div>
+      <h2>Evaluá tu empresa antes de calificar.</h2>
+      <p class="sub">¿Querés prestarle servicios a las grandes operadoras de Oil &amp; Gas o Minería pero no sabés si tu empresa está lista? Son sectores que califican a sus proveedores con criterios estrictos. Umbral3 te da un diagnóstico independiente, con el criterio real que aplican las operadoras, para que sepas dónde estás parado antes de iniciar cualquier proceso formal de calificación.</p>
+    </div>
+
+    <!-- Diagnóstico gratuito: bloque destacado -->
+    <div class="domains reveal" style="grid-template-columns:1fr">
+      <div class="domain" style="border-right:none">
+        <div class="dlabel">Diagnóstico gratuito y online</div>
+        <ul>
+          <li>Toma 5 minutos · sin crear cuenta ni cargar documentación</li>
+          <li>Evalúa tu cumplimiento en las áreas clave que analizan las operadoras</li>
+          <li>Al terminar recibís tus áreas de fortaleza y tus brechas principales</li>
+        </ul>
+        <a class="btn" href="https://umbral3-app.vercel.app/diagnostico" target="_blank" rel="noopener" style="display:inline-block;margin-top:22px">Hacé el diagnóstico gratis</a>
+      </div>
+    </div>
+
+    <!-- Las cuatro áreas -->
+    <div class="domains reveal" style="margin-top:0">
+      <div class="domain">
+        <div class="dlabel">Qué evaluamos</div>
+        <ul>
+          <li>Identidad, seguros y habilitaciones (documentación bloqueante)</li>
+          <li>Sistema de gestión de calidad y capacitación</li>
+          <li>Mantenimiento, proveedores y compras</li>
+          <li>Seguridad, emergencias y trabajos de alto riesgo</li>
+        </ul>
+      </div>
+      <div class="domain">
+        <div class="dlabel">Nuestro compromiso</div>
+        <ul>
+          <li>Confidencialidad: trayectoria en auditoría y evaluación de proveedores</li>
+          <li>Dashboard de cumplimiento: progreso por área y requisitos bloqueantes</li>
+          <li>Evaluación rápida: informes en pocos días hábiles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EL PROCESO — usa el componente .ladder/.steps con la barra de umbral -->
+<section class="ladder" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Cómo funciona</h2>
+      <div class="note">Un diagnóstico independiente.<br>Sin vinculación oficial con las operadoras.</div>
+    </div>
+    <div class="steps reveal" style="border-top-color:var(--ink)">
+      <div class="step">
+        <div class="num">01 — AUTODIAGNÓSTICO</div>
+        <div class="umbral-bar"></div>
+        <h3>Gratis, en 5 minutos</h3>
+        <p>Sabés dónde estás parado <b>sin cargar documentación</b>. Un cuestionario online que evalúa las cuatro áreas clave.</p>
+      </div>
+      <div class="step">
+        <div class="num">02 — CARGA GUIADA</div>
+        <div class="umbral-bar"></div>
+        <h3>Si querés avanzar</h3>
+        <p>En una entrevista remota te guiamos sobre qué documentos necesitamos. <b>Subís tus archivos organizados</b> en cuatro bloques temáticos.</p>
+      </div>
+      <div class="step">
+        <div class="num">03 — REPORTE</div>
+        <div class="umbral-bar"></div>
+        <h3>Con criterio real</h3>
+        <p>Evaluamos tu documentación y generamos un informe <b>con el criterio que aplican las operadoras</b> — evidencia concreta para decidir si estás lista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- CONTACTO -->
 <section class="close" id="contacto">
