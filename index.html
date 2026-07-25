@@ -204,6 +204,14 @@
   @media(max-width:860px){
     .media-row{grid-template-columns:1fr;gap:0}
     .media-art{display:none}
+    /* --- nav en dos filas: marca arriba, botones abajo repartidos --- */
+    .nav{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:12px;gap:12px}
+    .brand{flex:1 1 auto}
+    .nav-actions{width:100%;display:flex;gap:10px}
+    .nav-actions .nav-cta{flex:1 1 0;text-align:center;padding:11px 8px;font-size:.7rem}
+  }
+  @media(max-width:380px){
+    .nav-actions .nav-cta{font-size:.62rem;letter-spacing:.03em;padding:10px 4px}
   }
 
   /* ---------- reveal ---------- */
@@ -243,7 +251,7 @@
     <a href="#top" class="brand" aria-label="UMBRAL 3 — Soluciones de gestión">
       <img class="brand-img" src="logo-horizontal.png" alt="UMBRAL 3 — Soluciones de gestión" />
     </a>
-    <div style="display:flex;align-items:center;gap:12px">
+    <div class="nav-actions">
       <a class="nav-cta" href="#oilgas">Oil &amp; Gas · Minería</a>
       <a class="nav-cta solid" href="#contacto">Radiografía de Margen</a>
     </div>
